@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Kezdőlap</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Puzzle</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/jigsaws/list">Kirakók listája</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/manufacturers/list">Gyártók listája</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/jigsaws/new">Új kirakó felvitele</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/manufacturers/new">Új gyártó felvitele</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <h1>Üdv a Puzzle alkalmazásban!</h1>
+
+    <h2>Kirakók listája</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Cím</th>
+            <th>Darabszám</th>
+            <th>Gyártó</th>
+            <th>Ár (Ft)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="jigsaw : ${jigsaws}">
+            <td th:text="${jigsaw.title}">Kirakó címe</td>
+            <td th:text="${jigsaw.pieces}">123</td>
+            <td th:text="${jigsaw.manufacturer.name}">Gyártó neve</td>
+            <td th:text="${#numbers.formatDecimal(jigsaw.price, 0, 'COMMA', 2, 'POINT')}">0.00</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>Gyártók listája</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Név</th>
+            <th>Alapítás éve</th>
+            <th>Székhely</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="manuf : ${manufacturers}">
+            <td th:text="${manuf.name}">Gyártó neve</td>
+            <td th:text="${manuf.yearOfEstablishment}">2020-01-01</td>
+            <td th:text="${manuf.headquarters}">Budapest</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
